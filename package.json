@@ -1,0 +1,26 @@
+{
+  "name": "tuenti-challenge-7",
+  "version": "1.0.0",
+  "description": "My solutions to the Tuenti Challenge 7, always in JavaScript!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kutyel/TuentiChallenge7.git"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "tuenti",
+    "challenge",
+    "7"
+  ],
+  "author": "Flavio Corpa Ríos <flaviocorpa@gmail.com> (https://github.com/kutyel)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kutyel/TuentiChallenge7/issues"
+  },
+  "homepage": "https://github.com/kutyel/TuentiChallenge7#readme"
+}

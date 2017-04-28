@@ -4,7 +4,7 @@ const fs = require('fs')
 const input = './submitInput.txt'
 const output = './output.txt'
 
-fs.unlink(output)
+fs.unlink(output, err => err && console.error(err))
 
 let t = 1
 let r = 0
@@ -23,7 +23,7 @@ while (t <= cases && index < inputFile.length) {
 
   const result = `Case #${t}: ${r}`
   console.log(result)
-  fs.appendFileSync(output, result + '\n')
+  fs.appendFileSync(output, `${result}\n`)
   t++
   index += 2
 }

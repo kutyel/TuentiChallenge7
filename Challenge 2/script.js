@@ -4,7 +4,7 @@ const fs = require('fs')
 const input = './submitInput.txt'
 const output = './output.txt'
 
-fs.unlink(output)
+fs.unlink(output, err => err && console.error(err))
 
 const file = fs.readFileSync(input).toString().split('\n')
 const cases = +file[0]
@@ -53,7 +53,7 @@ while (t <= cases && i < file.length) {
 
   const result = `Case #${t}: ${r.join(' ')}`
   console.log(result)
-  fs.appendFileSync(output, result + '\n')
+  fs.appendFileSync(output, `${result}\n`)
   r.length = 0
   points = 0
   index = 0

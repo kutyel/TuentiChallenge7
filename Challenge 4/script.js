@@ -15,7 +15,7 @@ function findSmallestTriangle (n) {
       for (let c = 2; c < n.length; c += 3) {
         // Triangle inequality theory
         // a + b > c && b + c > a && a + c > b
-        if (n[a] + n[b] >= n[c] && n[b] + n[c] >= n[a] && n[a] + n[c] >= n[b]) {
+        if (n[a] + n[b] > n[c] && n[b] + n[c] > n[a] && n[a] + n[c] > n[b]) {
           if (n[a] + n[b] + n[c] < min || !min) {
             min = n[a] + n[b] + n[c]
           }

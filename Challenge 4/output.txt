@@ -14,7 +14,7 @@ Case #13: IMPOSSIBLE
 Case #14: IMPOSSIBLE
 Case #15: 20
 Case #16: IMPOSSIBLE
-Case #17: 14
+Case #17: IMPOSSIBLE
 Case #18: 15
 Case #19: 20
 Case #20: 21
@@ -24,7 +24,7 @@ Case #23: 24
 Case #24: 11
 Case #25: IMPOSSIBLE
 Case #26: 17
-Case #27: 12
+Case #27: IMPOSSIBLE
 Case #28: IMPOSSIBLE
 Case #29: IMPOSSIBLE
 Case #30: IMPOSSIBLE

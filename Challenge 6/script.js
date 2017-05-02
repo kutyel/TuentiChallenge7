@@ -30,8 +30,8 @@ while (t <= c && index < inputFile.length) {
 
   // Second, create the graph
   const g = new Graph()
-  for (let i = 1; i <= f; i++) {
-    g.addVertex(i, Object.assign({ [i - 1]: 0, [i + 1]: i }, shortcuts[i]))
+  for (let n = 1; n <= f; n++) {
+    g.addVertex(n, Object.assign({ [n - 1]: 0, [n + 1]: n }, shortcuts[n]))
   }
 
   // Third, find shortest path

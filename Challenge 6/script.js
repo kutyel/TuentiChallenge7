@@ -1,7 +1,7 @@
 'use strict'
 
 const fs = require('fs')
-const input = './testInput.txt'
+const input = './submitInput.txt'
 const output = './output.txt'
 const Graph = require('./dijkstras')
 
@@ -23,12 +23,20 @@ while (t <= c && index < inputFile.length) {
   while (s-- > 0) {
     index++
     const [a, b, y] = inputFile[index].split(' ').map(Number)
-    shortcuts[a] = { [b]: y }
+    // Watch out: don't take longer paths!
+    if (shortcuts[a] && shortcuts[a][b] > y) {
+      shortcuts[a][b] = y
+    }
+    shortcuts[a] = Object.assign({ [b]: y }, shortcuts[a])
   }
 
   // Second, create the graph
   const g = new Graph()
   for (let n = 1; n <= f; n++) {
+    // Same here :)
+    if (shortcuts[n] && shortcuts[n][n + 1] > n) {
+      shortcuts[n][n + 1] = n
+    }
     g.addVertex(n, Object.assign({ [n - 1]: 0, [n + 1]: n }, shortcuts[n]))
   }
 

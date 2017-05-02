@@ -8,7 +8,6 @@ const Graph = require('./dijkstras')
 fs.unlink(output, err => err && console.error(err))
 
 let t = 1
-let r = 0
 let index = 1
 
 const inputFile = fs.readFileSync(input).toString().split('\n')
@@ -21,11 +20,10 @@ while (t <= c && index < inputFile.length) {
   // First, read all variables
   let [f, s] = inputFile[index].split(' ')
   const shortcuts = {}
-  while (+s > 0) {
+  while (s-- > 0) {
     index++
     const [a, b, y] = inputFile[index].split(' ').map(Number)
     shortcuts[a] = { [b]: y }
-    s--
   }
 
   // Second, create the graph
@@ -35,7 +33,7 @@ while (t <= c && index < inputFile.length) {
   }
 
   // Third, find shortest path
-  r = translate(g, g.shortestPath('1', f).concat('1').reverse())
+  const r = translate(g, g.shortestPath('1', f).concat('1').reverse())
 
   const result = `Case #${t}: ${r}`
   console.log(result)

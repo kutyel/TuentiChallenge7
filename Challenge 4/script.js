@@ -3,6 +3,7 @@
 const fs = require('fs')
 const input = './testInput.txt'
 const output = './output.txt'
+const combinations = require('./combinations.js').kCombinations
 
 fs.unlink(output, err => err && console.error(err))
 
@@ -10,16 +11,14 @@ let c = 0
 
 function findSmallestTriangle (n) {
   let min = 0
-  for (let a = 0; a < n.length - 2; a += 3) {
-    for (let b = 1; b < n.length - 1; b += 3) {
-      for (let c = 2; c < n.length; c += 3) {
-        // Triangle inequality theory
-        // a + b > c && b + c > a && a + c > b
-        if (n[a] + n[b] > n[c] && n[b] + n[c] > n[a] && n[a] + n[c] > n[b]) {
-          if (n[a] + n[b] + n[c] < min || !min) {
-            min = n[a] + n[b] + n[c]
-          }
-        }
+  const combs = combinations(n, 3)
+  for (let x of combs) {
+    const [a, b, c] = x
+    // Triangle inequality theory
+    // a + b > c && b + c > a && a + c > b
+    if (a + b > c && b + c > a && a + c > b) {
+      if (a + b + c < min || !min) {
+        min = a + b + c
       }
     }
   }

@@ -29,10 +29,9 @@ while (t <= c && index < inputFile.length) {
   }
 
   // Second, create the graph
-  let g = new Graph()
+  const g = new Graph()
   for (let i = 1; i <= f; i++) {
-    g.addVertex(i, Object.assign({ [i + 1]: i }, shortcuts[i]))
-    // TODO: add lower floors
+    g.addVertex(i, Object.assign({ [i - 1]: 0, [i + 1]: i }, shortcuts[i]))
   }
 
   // Third, find shortest path
@@ -41,7 +40,6 @@ while (t <= c && index < inputFile.length) {
   const result = `Case #${t}: ${r}`
   console.log(result)
   fs.appendFileSync(output, `${result}\n`)
-  g = null
   index++
   t++
 }

@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const input = './submitInput.txt'
-const output = './output.txt'
+const output = './submitOutput.txt'
 const Graph = require('./dijkstras')
 
 fs.unlink(output, err => err && console.error(err))

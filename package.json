@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/kutyel/TuentiChallenge7/issues"
   },
-  "homepage": "https://github.com/kutyel/TuentiChallenge7#readme"
+  "homepage": "https://github.com/kutyel/TuentiChallenge7#readme",
+  "dependencies": {
+    "big-integer": "^1.6.22"
+  }
 }

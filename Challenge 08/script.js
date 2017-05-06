@@ -3,30 +3,26 @@
 const fs = require('fs')
 const input = './submitInput.txt'
 const output = './submitOutput.txt'
-const bigInt = require('big-integer')
-const utf16ToASCII = require('./unicode')
+const bigNumber = require('big-integer')
+const { replaceDigits } = require('unicodedigits')
 
 fs.unlink(output, err => err && console.error(err))
 
 let c = 0
 
-function stringToHex (s) {
-  // First, turn the string into decimal numbers
-  const a = utf16ToASCII(s)
-  // Second, parse the string to Number
+const stringToHex = s => {
   try {
-    // Third, return the hex version of the number
-    return bigInt(a).toString(16)
+    return bigNumber(replaceDigits(s)).toString(16)
   } catch (err) {
     return 'N/A'
   }
 }
 
-fs.readFileSync(input, 'utf16le').toString().split('\n').forEach((num, t) => {
+fs.readFileSync(input, 'utf16le').toString().split('\n').forEach((line, t) => {
   if (t === 0) {
-    c = Number(utf16ToASCII(num))
+    c = Number(replaceDigits(line))
   } else if (t <= c) {
-    const r = stringToHex(num.trim())
+    const r = stringToHex(line.trim())
     const result = `Case #${t}: ${r}`
     console.log(result)
     fs.appendFileSync(output, `${result}\n`)

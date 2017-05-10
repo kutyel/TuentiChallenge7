@@ -2,21 +2,14 @@
 
 const fs = require('fs')
 const input = './submitInput.txt'
-const output = './output.txt'
+const output = './submitOutput.txt'
 const { log2, ceil } = Math
 
 fs.unlink(output, err => err && console.error(err))
 
-let c = 0
-
-fs.readFileSync(input).toString().split('\n').forEach((num, t) => {
-  if (t === 0) {
-    c = num
-  } else if (t <= c) {
-    const p = +num
-    const r = ceil(log2(p))
-    const result = `Case #${t}: ${r}`
-    console.log(result)
-    fs.appendFileSync(output, `${result}\n`)
-  }
+fs.readFileSync(input).toString().split('\n').slice(1, -1).forEach((num, t) => {
+  const r = ceil(log2(+num))
+  const result = `Case #${t + 1}: ${r}`
+  console.log(result)
+  fs.appendFileSync(output, `${result}\n`)
 })

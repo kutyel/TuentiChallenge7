@@ -2,39 +2,40 @@
 
 const fs = require('fs')
 const input = './submitInput.txt'
-const output = './output.txt'
+const output = './submitOutput.txt'
 const { trunc } = Math
 
 fs.unlink(output, err => err && console.error(err))
 
-let c = 0
-
 function getScalextric (s, c, d) {
+  let [x, y, z] = [0, trunc(c / 2) * 2, 0]
   // You need at least 4 corners to form a closed circuit
-  if (c < 4) {
-    return 0
+  if (y < 4) {
+    y = 0
+    x = 0
+    z = 0
+  } else if (y === 4) {
+    x = trunc(s / 2) * 2
+    z = s >= 2 ? d : trunc(d / 2) * 2
+  } else if ((y - 2) % 4 === 0 && (s >= 2)) {
+    x = trunc(s / 2) * 2
+    z = d
+  } else if (y === 8 && (s >= 2 || d >= 1)) {
+    x = trunc(s / 2) * 2
+    z = d
+  } else if (y >= 12 && (y % 4 === 0)) {
+    x = trunc(s / 2) * 2
+    z = d
   } else {
-    const max = s + c + d
-    // You need at least S*2 > D to close the circuit
-    if (s >= d * 2 && d > 0) {
-      return max - trunc(s % (d * 2))
-    } else if (s === d && s < 4 && d < 2) {
-      return 4
-    } else if (d >= 4 && s >= d && d % 2 === 0) {
-      return max - (s - d)
-    }
-    return max
+    y -= 2
   }
+  return y + x + z
 }
 
-fs.readFileSync(input).toString().split('\n').forEach((line, t) => {
-  if (t === 0) {
-    c = line
-  } else if (t <= c) {
-    const [s, c, d] = line.split(' ').map(Number)
-    const r = getScalextric(s, c, d)
-    const result = `Case #${t}: ${r}`
-    console.log(result)
-    fs.appendFileSync(output, `${result}\n`)
-  }
+fs.readFileSync(input).toString().split('\n').slice(1, -1).forEach((line, t) => {
+  const [s, c, d] = line.split(' ').map(Number)
+  const r = getScalextric(s, c, d)
+  const result = `Case #${t + 1}: ${r}`
+  console.log(result)
+  fs.appendFileSync(output, `${result}\n`)
 })

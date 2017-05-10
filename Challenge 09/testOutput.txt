@@ -48,7 +48,7 @@ Case #47: 24
 Case #48: 18
 Case #49: 22
 Case #50: 17
-Case #51: 13
+Case #51: 8
 Case #52: 0
 Case #53: 9
 Case #54: 28
@@ -69,7 +69,7 @@ Case #68: 21
 Case #69: 0
 Case #70: 19
 Case #71: 0
-Case #72: 14
+Case #72: 4
 Case #73: 19
 Case #74: 0
 Case #75: 15
@@ -80,7 +80,7 @@ Case #79: 10
 Case #80: 25
 Case #81: 4
 Case #82: 4
-Case #83: 4
+Case #83: 6
 Case #84: 10
 Case #85: 6
 Case #86: 9

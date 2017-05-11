@@ -8,8 +8,6 @@ const { replaceDigits } = require('unicodedigits')
 
 fs.unlink(output, err => err && console.error(err))
 
-let c = 0
-
 const stringToHex = s => {
   try {
     return bigNumber(replaceDigits(s)).toString(16)
@@ -18,13 +16,9 @@ const stringToHex = s => {
   }
 }
 
-fs.readFileSync(input, 'utf16le').toString().split('\n').forEach((line, t) => {
-  if (t === 0) {
-    c = Number(replaceDigits(line))
-  } else if (t <= c) {
-    const r = stringToHex(line.trim())
-    const result = `Case #${t}: ${r}`
-    console.log(result)
-    fs.appendFileSync(output, `${result}\n`)
-  }
+fs.readFileSync(input, 'utf16le').toString().split('\n').slice(1, -1).forEach((line, t) => {
+  const r = stringToHex(line.trim())
+  const result = `Case #${t + 1}: ${r}`
+  console.log(result)
+  fs.appendFileSync(output, `${result}\n`)
 })

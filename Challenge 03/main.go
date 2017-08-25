@@ -16,10 +16,6 @@ func check(e error) {
 }
 
 func main() {
-	t := 1
-	r := 0.0
-	index := 2
-
 	data, err := ioutil.ReadFile("submitInput.txt")
 	check(err)
 	file, err := os.Create("submitOutput.txt")
@@ -28,27 +24,16 @@ func main() {
 	defer file.Close()
 
 	lines := strings.Split(string(data), "\n")
-	cases, err := strconv.Atoi(lines[0])
-	check(err)
 
-	for t <= cases && index < len(lines) {
-		total := 0
-		for _, s := range strings.Split(lines[index], " ") {
-			n, err := strconv.Atoi(s)
-			check(err)
-			total += n
-		}
-		r = math.Trunc(float64(total) / float64(8))
+	for t := 1; t < len(lines)-1; t++ {
+		num, err := strconv.ParseFloat(lines[t], 64)
+		check(err)
 
-		if total%8 != 0 {
-			r++
-		}
-
+		r := math.Ceil(math.Log2(num))
 		result := fmt.Sprintf("Case #%d: %d\n", t, int(r))
+
 		fmt.Print(result)
 		file.WriteString(result)
 		file.Sync()
-		t++
-		index += 2
 	}
 }

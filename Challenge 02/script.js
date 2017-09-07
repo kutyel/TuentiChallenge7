@@ -2,11 +2,14 @@
 
 const fs = require('fs')
 const input = './submitInput.txt'
-const output = './output.txt'
+const output = './submitOutput.txt'
 
 fs.unlink(output, err => err && console.error(err))
 
-const file = fs.readFileSync(input).toString().split('\n')
+const file = fs
+  .readFileSync(input)
+  .toString()
+  .split('\n')
 const cases = +file[0]
 
 let t = 1
@@ -25,7 +28,7 @@ while (t <= cases && i < file.length) {
     const score = scores[index]
     // strike
     if (score === 10 && roll === 1) {
-      points += (score + scores[index + 1] + scores[index + 2])
+      points += score + scores[index + 1] + scores[index + 2]
       r.push(points)
       frame++
     } else {
@@ -49,7 +52,7 @@ while (t <= cases && i < file.length) {
     index++
   }
   // frame 10
-  r.push(points += scores.slice(index).reduce((a, b) => a + b, 0))
+  r.push((points += scores.slice(index).reduce((a, b) => a + b, 0)))
 
   const result = `Case #${t}: ${r.join(' ')}`
   console.log(result)

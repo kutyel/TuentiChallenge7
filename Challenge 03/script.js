@@ -1,23 +1,23 @@
 'use strict'
 
 const fs = require('fs')
-const miss = require('mississippi')
+const byline = require('byline')
 
 const { log2, ceil } = Math
 const read = fs.createReadStream('./submitInput.txt')
 const write = fs.createWriteStream('./submitOutput.txt')
+const stream = byline.createStream(read)
 
-let test = 1
+let test = 0
 
-const calc = miss.through((chunk, enc, cb) => {
-  const num = Number(chunk.toString())
-  const result = ceil(log2(num))
+stream.on('data', line => {
+  if (test > 0) {
+    const num = Number(line.toString())
+    const result = ceil(log2(num))
+
+    write.write(`Case #${test}: ${result}\n`)
+  }
   test++
-
-  return cb(null, `Case #${test}: ${result}`)
 })
 
-miss.pipe(read, calc, write, err => {
-  if (err) return console.error(`FATAL ERROR: ${err}`)
-  console.log('Success! 🎉')
-})
+stream.on('end', () => console.log('Success! 🎉'))

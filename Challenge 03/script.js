@@ -1,15 +1,23 @@
 'use strict'
 
 const fs = require('fs')
-const input = './submitInput.txt'
-const output = './submitOutput.txt'
+const byline = require('byline')
+
 const { log2, ceil } = Math
+const read = fs.createReadStream('./submitInput.txt')
+const write = fs.createWriteStream('./submitOutput.txt')
+const stream = byline.createStream(read)
 
-fs.unlink(output, err => err && console.error(err))
+let test = 0
 
-fs.readFileSync(input).toString().split('\n').slice(1, -1).forEach((num, t) => {
-  const r = ceil(log2(+num))
-  const result = `Case #${t + 1}: ${r}`
-  console.log(result)
-  fs.appendFileSync(output, `${result}\n`)
+stream.on('data', line => {
+  if (test > 0) {
+    const num = Number(line.toString())
+    const result = ceil(log2(num))
+
+    write.write(`Case #${test}: ${result}\n`)
+  }
+  test++
 })
+
+stream.on('end', () => console.log('Success! 🎉'))

@@ -25,6 +25,7 @@
   "homepage": "https://github.com/kutyel/TuentiChallenge7#readme",
   "dependencies": {
     "big-integer": "^1.6.22",
+    "byline": "^5.0.0",
     "unicodedigits": "^0.1.2"
   }
 }
